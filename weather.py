@@ -1,5 +1,6 @@
-from bs4 import BeautifulSoup
 import requests as re
+from bs4 import BeautifulSoup
+
 
 def get_weather_data(area: str):
     url = 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=' + area + '+날씨'
@@ -18,3 +19,6 @@ def get_weather_data(area: str):
         message += info + '\n'
 
     return message
+
+
+print(get_weather_data("강남"))

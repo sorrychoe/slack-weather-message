@@ -19,5 +19,17 @@ jobs:
       run: |
         make install
     - name: send weather data
+      id: weather
       run: |
-        python weather.py
+        echo "$(python weather.py)" >> GITHUB_OUTPUT
+    - name: Send custom JSON data to Slack workflow
+      id: slack
+      uses: slackapi/slack-github-action@v1.24.0
+      with:
+        payload: |
+          {
+            "text": ${{ github.output }}
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

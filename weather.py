@@ -1,17 +1,13 @@
-import os
-
-import requests as re
+import json
+import requests
 from bs4 import BeautifulSoup
-
-url = os.environ.get('SLACK_URL')
-
 
 def get_weather_data(area: str):
 
-    title = "[오늘의 날씨]"
+    title = f"[오늘의 {area} 날씨]"
     url = 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=' + area + '+날씨'
 
-    html = re.get(url)
+    html = requests.get(url)
     soup = BeautifulSoup(html.text, 'html.parser')
 
     temperature = soup.select_one("div.temperature_text").text.strip()
@@ -27,10 +23,5 @@ def get_weather_data(area: str):
     return message
 
 
-def slack_post_text(url, text):
-    result = re.post(url, {"message": text})
-    return result
-
-
 if __name__ == "__main__":
-    slack_post_text(url, get_weather_data("강남"))
+    print(get_weather_data("강남"))

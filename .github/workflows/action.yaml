@@ -21,7 +21,7 @@ jobs:
     - name: get weather data
       id: weather
       run: |
-        python weather.py
+        echo "$(python weather.py)"
     - name: Send to Slack 
       id: slack
       uses: slackapi/slack-github-action@v1.24.0

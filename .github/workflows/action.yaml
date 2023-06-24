@@ -21,13 +21,13 @@ jobs:
     - name: get weather data
       id: weather
       run: |
-        echo "$(python weather.py)" >> $GITHUB_OUTPUT
+        python weather.py
     - name: Send to Slack 
       id: slack
       uses: slackapi/slack-github-action@v1.24.0
       with:
         payload: |
-          {"text": "${{ steps.weather.outputs.* }}" }
+          {"text": "${{ steps.weather.outputs.stdout }}" }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

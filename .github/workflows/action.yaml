@@ -7,7 +7,7 @@ on:
   #   - cron: '0 8 * * *'
 
 jobs:
-  crawling:
+  send-weather-message-to-slack:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -21,13 +21,11 @@ jobs:
     - name: get weather data
       id: weather
       run: |
-        echo "$(python weather.py)"
-    - name: Send to Slack 
+        echo $(python weather.py) >> weather.json
+    - name: Send to slack
       id: slack
       uses: slackapi/slack-github-action@v1.24.0
       with:
-        payload: |
-          {"text": "${{ steps.weather.outputs.stdout }}" }
+        payload-file-path: "./weather.json"
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

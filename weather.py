@@ -2,6 +2,7 @@ import json
 import requests
 from bs4 import BeautifulSoup
 
+
 def get_weather_data(area: str):
 
     title = f"[오늘의 {area} 날씨]"
@@ -23,5 +24,7 @@ def get_weather_data(area: str):
     return message
 
 
+
 if __name__ == "__main__":
-    print(get_weather_data("강남"))
+    message = get_weather_data("강남")
+    print({"text": message})

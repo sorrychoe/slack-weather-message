@@ -12,7 +12,7 @@
   make install
 ```
 
-Make가 없는 경우, 별도로 설치가 필요합니다. 
+Make가 없는 경우, 별도로 설치가 필요합니다.
 - [Make.exe install](https://gnuwin32.sourceforge.net/packages/make.htm)
 
 ---
@@ -30,5 +30,3 @@ Make가 없는 경우, 별도로 설치가 필요합니다.
 ## Authors
 
 - [@sorrychoe](https://www.github.com/sorrychoe)
-
-

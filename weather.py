@@ -1,8 +1,10 @@
 import os
+
 import requests as re
 from bs4 import BeautifulSoup
 
 url = os.environ.get('SLACK_URL')
+
 
 def get_weather_data(area: str):
 
@@ -24,9 +26,11 @@ def get_weather_data(area: str):
 
     return message
 
+
 def slack_post_text(url, text):
-    result = requests.post(url, json = {"text": text})
+    result = re.post(url, {"message": text})
     return result
+
 
 if __name__ == "__main__":
     slack_post_text(url, get_weather_data("강남"))

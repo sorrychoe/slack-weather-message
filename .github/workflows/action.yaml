@@ -6,9 +6,6 @@ on:
   # schedule:
   #   - cron: '0 8 * * *'
 
-permissions:
-  issues: write
-
 jobs:
   crawling:
     runs-on: ubuntu-latest
@@ -24,13 +21,13 @@ jobs:
     - name: get weather data
       id: weather
       run: |
-        echo "$(python weather.py)" >> GITHUB_OUTPUT
+        echo "$(python weather.py)" >> $GITHUB_OUTPUT
     - name: Send to Slack 
       id: slack
       uses: slackapi/slack-github-action@v1.24.0
       with:
         payload: |
-          {"text": "${{ github.output }}" }
+          {"text": "${{ steps.weather.outputs.* }}" }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

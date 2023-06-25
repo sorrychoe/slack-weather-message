@@ -15,6 +15,12 @@ weather_emoji = {
     "갬": " :rainbow:",
 }
 
+status_emoji = {
+    "좋음": " :smile:",
+    "보통": " :grinning:",
+    "나쁨": " :worried:",
+}
+
 
 def get_weather_data(area: str):
 
@@ -35,6 +41,9 @@ def get_weather_data(area: str):
     message = title + '\n\n' + temperature + ' ' + status + '\n\n' + weather_etc + '\n\n'
 
     for info in weather_etc2:
+        for status in status_emoji:
+            if status in info:
+                info += status_emoji[status]
         message += info + '\n\n'
 
     return message

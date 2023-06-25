@@ -1,6 +1,19 @@
 import json
+
 import requests
 from bs4 import BeautifulSoup
+
+weather_emoji = {
+    "맑음": " :sunny:",
+    "구름": " :cloud:",
+    "비": " :unbrella:",
+    "눈": " :snowman",
+    "뇌우": " :zap:",
+    "안개": " :foggy:",
+    "소나기": " :cyclone:",
+    "우박" : " :snowflake:",
+    "갬": " :rainbow:",
+}
 
 
 def get_weather_data(area: str):
@@ -13,6 +26,9 @@ def get_weather_data(area: str):
 
     temperature = soup.select_one("div.temperature_text").text.strip()
     status = soup.select_one("div.temperature_info > p").text.strip()
+    for weather in weather_emoji:
+        if weather in status:
+            status += weather_emoji[weather]
     weather_etc = soup.select_one("div.temperature_info > dl").text.strip()
     weather_etc2 = [etc_info.text.strip() for etc_info in soup.select_one("div.report_card_wrap > ul")][1:-1:2]
 
@@ -29,4 +45,4 @@ if __name__ == "__main__":
     data = {"text": message}
     with open('./weather.json','w') as f:
         json.dump(data, f, ensure_ascii=False)
-    
+    print(message)

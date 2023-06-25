@@ -1,6 +1,8 @@
 name: crawling & send message
 
 on:
+  push:
+    - branch: ["main"]
   schedule:
     - cron: '0 22 * * 0-4'
 

@@ -1,4 +1,4 @@
-.PHONY: install format data clear
+.PHONY: install format test clear
 
 NAME = slack-weather-message
 
@@ -13,8 +13,9 @@ format:
 	isort --settings-file=isort.cfg weather.py
 	flake8 --config=.flake8 weather.py
 
-run:
+test:
 	python weather.py
 
 clear:
-	rm -fr **/__pycache__
+	shopt -s globstar ; \
+	rm -fr **/__pycache__ **/*.json ;

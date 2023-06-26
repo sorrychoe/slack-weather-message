@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 weather_emoji = {
     "맑음": " :sunny:",
     "구름": " :cloud:",
-    "비": " :unbrella:",
+    "비": " :umbrella:",
     "눈": " :snowman",
     "뇌우": " :zap:",
     "안개": " :foggy:",

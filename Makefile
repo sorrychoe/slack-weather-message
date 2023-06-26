@@ -10,11 +10,11 @@ install:
 	pre-commit install
 
 format:
-	isort --settings-file=isort.cfg weather.py
-	flake8 --config=.flake8 weather.py
+	isort --settings-file=isort.cfg src/weather.py
+	flake8 --config=.flake8 src/weather.py
 
 test:
-	python weather.py
+	python src/weather.py
 
 clear:
 	shopt -s globstar ; \

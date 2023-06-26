@@ -8,7 +8,7 @@ from emoji import status_emoji, weather_emoji
 
 def get_weather_data(area: str):
 
-    title = f"[오늘의 {area} 날씨]"
+    title = f"**[오늘의 {area} 날씨]**"
     url = 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=' + area + '+날씨'
 
     html = requests.get(url)

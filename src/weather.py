@@ -22,7 +22,7 @@ def get_weather_data(area: str):
     weather_etc = soup.select_one("div.temperature_info > dl").text.strip()
     weather_etc2 = [etc_info.text.strip() for etc_info in soup.select_one("div.report_card_wrap > ul")][1:-1:2]
 
-    message = title + '\n\n' + temperature + ' ' + status + '\n\n' + weather_etc + '\n\n'
+    message = title + '\n\n' + temperature + '\n' + status + '\n\n' + weather_etc + '\n\n'
 
     for info in weather_etc2:
         for status in status_emoji:

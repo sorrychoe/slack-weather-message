@@ -15,4 +15,5 @@ status_emoji = {
     "좋음": " :smile:",
     "보통": " :grinning:",
     "나쁨": " :worried:",
+    "높음": " :worried:",
 }

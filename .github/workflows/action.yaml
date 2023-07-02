@@ -1,4 +1,4 @@
-name: crawling & send message
+name: crawling weather & send message
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     - cron: '0 22 * * 0-4'
 
 jobs:
-  send-weather-message-to-slack:
+  send-weather-alert-to-slack:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3

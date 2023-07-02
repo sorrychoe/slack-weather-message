@@ -6,9 +6,29 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strings"
-	"emoji"
+
 	"github.com/PuerkitoBio/goquery"
 )
+
+var weatherEmoji = map[string]string{
+	"맑음":  " :sunny:",
+	"구름":  " :cloud:",
+	"흐림":  " :cloud:",
+	"비":   " :umbrella:",
+	"눈":   " :snowman",
+	"뇌우":  " :zap:",
+	"안개":  " :foggy:",
+	"소나기": " :cyclone:",
+	"우박":  " :snowflake:",
+	"갬":   " :rainbow:",
+}
+
+var statusEmoji = map[string]string{
+	"좋음": " :smile:",
+	"보통": " :grinning:",
+	"나쁨": " :worried:",
+	"높음": " :worried:",
+}
 
 func getWeatherData(area string) (string, error) {
 	title := fmt.Sprintf("*[오늘의 %s 날씨]*", area)
@@ -27,7 +47,7 @@ func getWeatherData(area string) (string, error) {
 
 	temperature := doc.Find("div.temperature_text").Text()
 	status := doc.Find("div.temperature_info > p").Text()
-	for key, emoji := range statusEmoji {
+	for key, emoji := range weatherEmoji {
 		if strings.Contains(status, key) {
 			status += emoji
 		}

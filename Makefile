@@ -8,18 +8,10 @@ GOMOD=$(GOCMD) mod
 GOTEST=$(GOCMD) run
 GOINSTALL=$(GOCMD) install
 GOFLAGS := -v
-LDFLAGS := -s -w
 
-ifneq ($(shell go env GOOS),darwin)
-LDFLAGS := -extldflags "-static"
-endif
-
-install:
-	pre-commit install
-	$(GOINSTALL) github.com/PuerkitoBio/goquery@latest
-
-build:
-	$(GOBUILD) $(GOFLAGS) -ldflags '$(LDFLAGS)' -o main.go
+init:
+ 	$(GOMOD) init
+	$(GOINSTALL) $(GOFLAGS) github.com/PuerkitoBio/goquery@latest
 
 test:
 	$(GOTEST) main.go

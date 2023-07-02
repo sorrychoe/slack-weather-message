@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 
@@ -36,40 +37,36 @@ func getWeatherData(area string) (string, error) {
 
 	resp, err := http.Get(url)
 	if err != nil {
-		return "", err
+		log.Fatal(err)
 	}
 	defer resp.Body.Close()
 
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
-		return "", err
+		log.Fatal(err)
 	}
 
-	temperature := doc.Find("div.temperature_text").Text()
-	status := doc.Find("div.temperature_info > p").Text()
+	temperature := doc.Find("div.temperature_text").First().Text()
+	status := doc.Find("div.temperature_info > p").First().Text()
 	for key, emoji := range weatherEmoji {
 		if strings.Contains(status, key) {
 			status += emoji
 		}
 	}
 
-	weatherEtc := doc.Find("div.temperature_info > dl").Text()
-	weatherEtc2 := []string{}
-	doc.Find("div.report_card_wrap > ul").Children().Each(func(i int, s *goquery.Selection) {
-		if i%2 != 0 {
-			weatherEtc2 = append(weatherEtc2, s.Text())
-		}
-	})
+	weatherEtc := doc.Find("div.temperature_info > dl").First().Text()
+	weatherEtc2 := doc.Find("div.report_card_wrap > ul").First().Text()
+	sliceEtc2 := strings.Split(weatherEtc2, "  ")
 
 	message := fmt.Sprintf("%s\n\n%s\n\n%s\n\n%s\n\n", title, temperature, status, weatherEtc)
 
-	for _, info := range weatherEtc2 {
+	for _, info := range sliceEtc2 {
 		for key, emoji := range statusEmoji {
 			if strings.Contains(info, key) {
 				info += emoji
 			}
 		}
-		message += fmt.Sprintf("%s\n\n", info)
+		message += fmt.Sprintf("%s\n", info)
 	}
 
 	return message, nil

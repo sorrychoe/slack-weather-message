@@ -11,17 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python
-      uses: actions/setup-python@v3
+    - uses: actions/setup-go@v4
       with:
-        python-version: '3.10'
+        go-version: '>=1.20.0'
     - name: Install dependencies
       run: |
-        make install
+        make init
     - name: get weather data
       id: weather
       run: |
-        go rum main.go
+        go run main.go
     - name: Send to slack
       id: slack
       uses: slackapi/slack-github-action@v1.24.0

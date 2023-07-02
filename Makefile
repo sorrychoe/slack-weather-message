@@ -5,7 +5,7 @@ SHELL := bash
 GOCMD=go
 GOBUILD=$(GOCMD) build
 GOMOD=$(GOCMD) mod
-GOTEST=$(GOCMD) run
+GORUN=$(GOCMD) run
 GOINSTALL=$(GOCMD) install
 GOFLAGS := -v
 
@@ -13,8 +13,8 @@ init:
  	$(GOMOD) init
 	$(GOINSTALL) $(GOFLAGS) github.com/PuerkitoBio/goquery@latest
 
-test:
-	$(GOTEST) main.go
+run:
+	$(GORUN) main.go
 
 tidy:
 	$(GOMOD) tidy

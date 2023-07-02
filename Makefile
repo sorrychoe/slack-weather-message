@@ -10,7 +10,7 @@ GOINSTALL=$(GOCMD) install
 GOFLAGS := -v
 
 init:
- 	$(GOMOD) init
+	$(GOMOD) init \
 	$(GOINSTALL) $(GOFLAGS) github.com/PuerkitoBio/goquery@latest
 
 run:

@@ -37,10 +37,10 @@ cron으로 선언되는 변수의 값은 하단과 같습니다.
 
 ## Installation for Develop
 
-Local에서 실행하거나 설정을 변경하고자 할 경우, 하단의 명령어를 통해 개발 환경을 세팅해주시기 바랍니다.
+Local에서 실행하려 할 경우, 다음 명령어를 입력해주시기 바랍니다.
 
 ```bash
-  make init
+  make run
 ```
 
 Make가 없는 경우, 별도로 설치가 필요합니다.

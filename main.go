@@ -56,7 +56,7 @@ func getWeatherData(area string) (string, error) {
 
 	weatherEtc := doc.Find("div.temperature_info > dl").First().Text()
 	weatherEtc2 := doc.Find("div.report_card_wrap > ul").First().Text()
-	sliceEtc2 := strings.Split(weatherEtc2, "  ")
+	sliceEtc2 := strings.Split(weatherEtc2, "   ")
 
 	message := fmt.Sprintf("%s\n\n%s\n\n%s\n\n%s", title, temperature, status, weatherEtc)
 

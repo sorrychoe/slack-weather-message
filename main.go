@@ -32,7 +32,7 @@ var statusEmoji = map[string]string{
 }
 
 func getWeatherData(area string) (string, error) {
-	title := fmt.Sprintf("*[오늘의 %s 날씨]*", area)
+	title := fmt.Sprintf("@channel/n*[오늘의 %s 날씨]*", area)
 	url := fmt.Sprintf("https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%s+날씨", area)
 
 	resp, err := http.Get(url)

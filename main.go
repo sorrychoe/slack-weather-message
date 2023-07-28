@@ -32,7 +32,6 @@ var statusEmoji = map[string]string{
 }
 
 func getWeatherData(area string) (string, error) {
-	alert := fmt.Sprintf("@channel")
 	title := fmt.Sprintf("*[오늘의 %s 날씨]*", area)
 	url := fmt.Sprintf("https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=%s+날씨", area)
 
@@ -59,7 +58,7 @@ func getWeatherData(area string) (string, error) {
 	weatherEtc2 := doc.Find("div.report_card_wrap > ul").First().Text()
 	sliceEtc2 := strings.Split(weatherEtc2, "  ")
 
-	message := fmt.Sprintf("%s\n\n%s\n\n%s\n\n %s\n\n%s", alert, title, temperature, status, weatherEtc)
+	message := fmt.Sprintf("%s\n\n%s\n\n%s\n\n %s\n\n%s", title, temperature, status, weatherEtc)
 
 	for _, info := range sliceEtc2 {
 		for key, emoji := range statusEmoji {

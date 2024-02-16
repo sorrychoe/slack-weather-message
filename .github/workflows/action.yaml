@@ -1,9 +1,9 @@
 name: crawling weather & send message
 on:
   # push:
-  #   branches: [ main ]
-  schedule:
-    - cron: '0 22 * * 0-4'
+    # branches: [ main ]
+  # schedule:
+  #   - cron: '0 22 * * 0-4'
 
 jobs:
   send-weather-alert-to-slack:

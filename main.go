@@ -3,9 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/PuerkitoBio/goquery"
@@ -86,7 +86,7 @@ func main() {
 		return
 	}
 
-	err = ioutil.WriteFile("./weather.json", jsonData, 0644)
+	err = os.WriteFile("./weather.json", jsonData, 0644)
 	if err != nil {
 		fmt.Println("Error:", err)
 		return

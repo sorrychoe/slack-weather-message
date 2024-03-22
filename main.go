@@ -73,7 +73,7 @@ func getWeatherData(area string) (string, error) {
 }
 
 func main() {
-	message, err := getWeatherData("강남")
+	message, err := getWeatherData("흥해읍")
 	if err != nil {
 		fmt.Println("Error:", err)
 		return

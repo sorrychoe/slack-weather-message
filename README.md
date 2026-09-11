@@ -14,7 +14,7 @@
 
 ### How to change Schedule time?
 
-시간대는 한국 시간 기준 평일 오전 7시로 설정돼 있습니다.
+시간대는 한국 시간 기준 평일 오전 8시로 설정돼 있습니다.
 
 시간대 변경은 .github/workflows/action.yaml 파일에 설정된 시간대를 변경해주시면 됩니다.
 

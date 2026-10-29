@@ -46,21 +46,22 @@ func getWeatherData(area string) (string, error) {
 		log.Fatal(err)
 	}
 
-	temperature := doc.Find("div.temperature_text").First().Text()
-	status := doc.Find("div.temperature_info > p").First().Text()
+	temperature := strings.TrimSpace(doc.Find("div.temperature_text").First().Text())
+	status := strings.TrimSpace(doc.Find("div.temperature_info > p").First().Text())
 	for key, emoji := range weatherEmoji {
 		if strings.Contains(status, key) {
 			status += emoji
 		}
 	}
 
-	weatherEtc := doc.Find("div.temperature_info > dl").First().Text()
+	weatherEtc := strings.TrimSpace(doc.Find("div.temperature_info > dl").First().Text())
 	weatherEtc2 := doc.Find("div.report_card_wrap > ul").First().Text()
 	sliceEtc2 := strings.Split(weatherEtc2, "  ")
 
 	message := fmt.Sprintf("%s\n\n%s\n\n%s\n\n%s", title, temperature, status, weatherEtc)
 
 	for _, info := range sliceEtc2 {
+		info = strings.TrimSpace(info)
 		for key, emoji := range statusEmoji {
 			if strings.Contains(info, key) {
 				info += emoji

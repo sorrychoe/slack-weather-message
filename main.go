@@ -47,6 +47,7 @@ func getWeatherData(area string) (string, error) {
 	}
 
 	temperature := strings.TrimSpace(doc.Find("div.temperature_text").First().Text())
+	temperature = strings.Replace(temperature, "현재 온도", "현재 온도 ", 1)
 	status := strings.TrimSpace(doc.Find("div.temperature_info > p").First().Text())
 	for key, emoji := range weatherEmoji {
 		if strings.Contains(status, key) {
@@ -74,7 +75,7 @@ func getWeatherData(area string) (string, error) {
 }
 
 func main() {
-	message, err := getWeatherData("강남구")
+	message, err := getWeatherData("영등포구")
 	if err != nil {
 		fmt.Println("Error:", err)
 		return

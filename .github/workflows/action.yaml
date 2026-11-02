@@ -3,7 +3,8 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '0 23 * * 0-4'
+    # KST Mon-Fri 07:47: avoid GitHub's busy start-of-hour schedule.
+    - cron: '47 22 * * 0-4'
 
 jobs:
   send-weather-alert-to-slack:
@@ -13,6 +14,16 @@ jobs:
     - uses: actions/setup-go@v4
       with:
         go-version: '>=1.20.0'
+    - name: Wait until 08:00 KST
+      if: github.event_name == 'schedule'
+      shell: bash
+      run: |
+        target=$(TZ=Asia/Seoul date -d 'today 08:00' +%s)
+        now=$(date +%s)
+        # shortcut: Actions can still start late; use an external scheduler if punctuality is required.
+        if (( now < target )); then
+          sleep "$((target - now))"
+        fi
     - name: get weather data
       id: weather
       run: |
